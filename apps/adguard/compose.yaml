@@ -1,0 +1,42 @@
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+    environment:
+      - TZ=${TZ:-UTC}
+    expose:
+      - 80
+      - 53
+      - 853
+    # Uncomment the following lines if you want to expose plain DNS. 
+    # You will also need to open the ports in your firewall.
+    # May need to stop/remove any existing DNS services on the host such as systemd-resolved.
+    # ports:
+    #   - "53:53/udp"
+    #   - "53:53/tcp"
+    volumes:
+      - ${DOCKER_DATA_DIR}/adguard/work:/opt/adguardhome/work
+      - ./config:/opt/adguardhome/conf
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.adguard.entrypoints=web"  
+      - "traefik.http.routers.adguard.rule=Host(`${ADGUARD_HOSTNAME}`)"
+
+      - "traefik.http.routers.adguard-secure.entrypoints=websecure"
+      - "traefik.http.routers.adguard-secure.rule=Host(`${ADGUARD_HOSTNAME}`)" 
+      - "traefik.http.routers.adguard-secure.tls=true"
+      - "traefik.http.routers.adguard-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.adguard-secure.service=adguard-secure"
+      - "traefik.http.services.adguard-secure.loadbalancer.server.port=${ADGUARD_PORT}"
+
+      - "traefik.tcp.routers.adguard-tls.rule=HostSNI(`${ADGUARD_HOSTNAME}`)"
+      - "traefik.tcp.routers.adguard-tls.tls=true"  
+      - "traefik.tcp.routers.adguard-tls.entrypoints=dot"
+      - "traefik.tcp.routers.adguard-tls.tls.certresolver=letsencrypt"
+      - "traefik.tcp.routers.adguard-tls.service=adguard-tls"
+      - "traefik.tcp.services.adguard-tls.loadbalancer.server.port=53"
+    profiles:
+      - adguard
+      - all

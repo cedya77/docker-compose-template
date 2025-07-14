@@ -1,6 +1,7 @@
 include:
   - apps/actual-budget/compose.yaml
   - apps/addon-manager/compose.yaml
+  - apps/adguard/compose.yaml
   - apps/aiolists/compose.yaml
   - apps/aiostreams/compose.yaml
   - apps/aiostremio/compose.yaml
@@ -57,6 +58,7 @@ include:
   - apps/sonarr/compose.yaml
   - apps/speedtest-tracker/compose.yaml
   - apps/sshbot/compose.yaml
+  - apps/stirling-pdf/compose.yaml
   - apps/streamystats/compose.yaml
   - apps/stremio-account-bootstrapper/compose.yaml
   - apps/stremio-ai-search/compose.yaml
