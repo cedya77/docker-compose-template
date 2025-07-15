@@ -1,0 +1,34 @@
+services:
+  crowdsec:
+    image: crowdsecurity/crowdsec
+    restart: unless-stopped
+    container_name: crowdsec
+    ports:
+      - 8080
+      - 7422
+    environment:
+      COLLECTIONS: "crowdsecurity/traefik crowdsecurity/appsec-virtual-patching crowdsecurity/appsec-generic-rules crowdsecurity/appsec-crs crowdsecurity/http-cve crowdsecurity/base-http-scenarios crowdsecurity/sshd"
+      CUSTOM_HOSTNAME: "crowdsec"
+      GID: "${PGID}"
+      BOUNCER_KEY_TRAEFIK: "${CROWDSEC_LAPI_KEY}"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.middlewares.crowdsec.plugin.bouncer.enabled=true"
+      - "traefik.http.middlewares.crowdsec.plugin.bouncer.logLevel=debug"
+      - "traefik.http.middlewares.crowdsec.plugin.bouncer.crowdseclapikey=${CROWDSEC_LAPI_KEY}"
+      - "traefik.http.middlewares.crowdsec.plugin.bouncer.crowdsecappsecenabled=true"
+    volumes:
+      - ${DOCKER_DATA_DIR}/traefik:/var/log/traefik:ro
+      - ${DOCKER_DATA_DIR}/crowdsec:/var/lib/crowdsec/data/
+      - ./config:/etc/crowdsec/
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    healthcheck:
+      test: ["CMD", "cscli", "version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    profiles:
+      - crowdsec
+      - all
+  

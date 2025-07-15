@@ -18,6 +18,10 @@ services:
       - '--global.checkNewVersion=false'
       - '--log=true'
       - "--log.level=INFO"
+      - '--accesslog=true'
+      - "--accesslog.filepath=/data/access.log"
+      - "--accesslog.bufferingsize=100"
+      - "--accesslog.fields.names.StartUTC=drop"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=${DOCKER_NETWORK?}"
@@ -40,14 +44,24 @@ services:
       - "--entryPoints.websecure.proxyProtocol.insecure=false"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=${TRUSTED_IPS}"
       - "--entryPoints.websecure.proxyProtocol.trustedIPs=${TRUSTED_IPS}"
+      # If you dont mind applying crowdsec to all routers, just uncomment the line below
+      # - "--entryPoints.websecure.http.middlewares=crowdsec@docker"
+      # You can instead choose to add it to specific routers only
+      # e.g. in a service's labels: (dont uncomment the line below)
+      # - "traefik.http.routers.myservice.middlewares=crowdsec@docker
+
 
       - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
       - "--certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL?}"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/config/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json"
       - "--certificatesresolvers.letsencrypt.acme.caserver=${LE_CA_SERVER?}"
+
+      # Uncomment when using crowdsec
+      # - "--experimental.plugins.bouncer.modulename=github.com/maxlerebourg/crowdsec-bouncer-traefik-plugin"
+      # - "--experimental.plugins.bouncer.version=v1.3.0"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "${DOCKER_DATA_DIR}/traefik:/config"
+      - "${DOCKER_DATA_DIR}/traefik:/data"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`${TRAEFIK_HOSTNAME?}`)"
@@ -63,6 +77,9 @@ services:
     depends_on:
       authelia:
         condition: service_healthy
+      # Uncomment when using crowdsec
+      # crowdsec:
+      #   condition: service_healthy
     profiles:
       - traefik
       - required

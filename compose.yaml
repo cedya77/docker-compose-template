@@ -16,6 +16,7 @@ include:
   - apps/byparr/compose.yaml
   - apps/cloudflare-ddns/compose.yaml
   - apps/comet/compose.yaml
+  - apps/crowdsec/compose.yaml
   - apps/dash/compose.yaml
   - apps/decypharr/compose.yaml
   - apps/dockge/compose.yaml
@@ -39,6 +40,7 @@ include:
   - apps/mediafusion/compose.yaml
   - apps/minecraft/compose.yaml
   - apps/nitter/compose.yaml
+  - apps/notifiarr/compose.yaml
   - apps/ntfy/compose.yaml
   - apps/nzbhydra2/compose.yaml
   - apps/omg-tv-addon/compose.yaml

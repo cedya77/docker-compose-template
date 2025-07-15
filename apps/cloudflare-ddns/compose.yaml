@@ -49,6 +49,7 @@ services:
         ${MEDIAFUSION_HOSTNAME},
         ${MINECRAFT_HOSTNAME},
         ${NITTER_HOSTNAME},
+        ${NOTIFIARR_HOSTNAME},
         ${NTFY_HOSTNAME},
         ${NZBHYDRA2_HOSTNAME},
         ${OMG_TV_STREMIO_ADDON_HOSTNAME},
