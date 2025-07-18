@@ -48,6 +48,7 @@ include:
   - apps/plausible/compose.yaml
   - apps/plex/compose.yaml
   - apps/plex-trakt-sync/compose.yaml
+  - apps/plexio/compose.yaml
   - apps/portainer/compose.yaml
   - apps/prowlarr/compose.yaml
   - apps/quetre/compose.yaml
@@ -68,11 +69,14 @@ include:
   - apps/stremio-jackett/compose.yaml
   - apps/stremio-letterboxd/compose.yaml
   - apps/stremio-server/compose.yaml
+  - apps/stremio-streaming-catalogs/compose.yaml
   - apps/stremio-trakt-addon/compose.yaml
   - apps/stremthru/compose.yaml
+  - apps/syncribullet/compose.yaml
   - apps/tautulli/compose.yaml
   - apps/thelounge/compose.yaml
   - apps/tmdb-addon/compose.yaml
+  - apps/tmdb-collections/compose.yaml
   - apps/torbox-manager/compose.yaml
   - apps/torbox-media-center/compose.yaml
   - apps/traefik/compose.yaml
@@ -81,6 +85,7 @@ include:
   - apps/vaultwarden/compose.yaml
   - apps/warp/compose.yaml
   - apps/watchtower/compose.yaml
+  - apps/webstreamr/compose.yaml
   - apps/wests-scripts/compose.yaml
   - apps/yamtrack/compose.yaml
   - apps/zilean/compose.yaml
