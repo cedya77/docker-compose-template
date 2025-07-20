@@ -19,6 +19,7 @@ include:
   - apps/crowdsec/compose.yaml
   - apps/dash/compose.yaml
   - apps/decypharr/compose.yaml
+  - apps/discord-tickets/compose.yaml
   - apps/dockge/compose.yaml
   - apps/dozzle/compose.yaml
   - apps/easynews-plus/compose.yaml

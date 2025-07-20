@@ -30,6 +30,7 @@ services:
         ${DASHDOT_HOSTNAME},
         ${DEBRIDAV_HOSTNAME},
         ${DECYPHARR_HOSTNAME},
+        ${DISCORD_TICKETS_HOSTNAME},
         ${DOCKGE_HOSTNAME},
         ${DOZZLE_HOSTNAME},
         ${EASYNEWS_PLUS_HOSTNAME},
