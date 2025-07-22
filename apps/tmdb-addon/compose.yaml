@@ -9,8 +9,11 @@ services:
       - PORT=3232
       - TMDB_API=${TMDB_API_KEY?}  # https://www.themoviedb.org/settings/api
       - FANART_API=${FANART_API_KEY?}  # https://fanart.tv/get-an-api-key/
-      - HOST_NAME=${TMDB_ADDON_HOSTNAME?}
+      - HOST_NAME=https://${TMDB_ADDON_HOSTNAME?}
       - MONGODB_URI=mongodb://mongodb:27017/tmdb
+      - MONGODB_METRICS=mongodb://mongodb:27017/tmdb_metrics
+      - METRICS_USER=${METRICS_USER?}
+      - METRICS_PASSWORD=${METRICS_PASSWORD?}
       - META_TTL=604800  # 1 week
       - CATALOG_TTL=86400  # 1 day
       - NO_CACHE=false  # Enable cache, set to true to disable

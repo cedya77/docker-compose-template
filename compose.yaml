@@ -77,6 +77,7 @@ include:
   - apps/tautulli/compose.yaml
   - apps/thelounge/compose.yaml
   - apps/tmdb-addon/compose.yaml
+  - apps/tmdb-addon-redis/compose.yaml
   - apps/tmdb-collections/compose.yaml
   - apps/torbox-manager/compose.yaml
   - apps/torbox-media-center/compose.yaml

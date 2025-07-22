@@ -1,0 +1,50 @@
+services:
+  tmdb-addon-redis:
+    image: ghcr.io/cedya77/tmdb-addon:latest
+    container_name: tmdb-addon-redis
+    restart: unless-stopped
+    expose:
+      - 3232
+    environment:
+      - PORT=3232
+      - TMDB_API=${TMDB_API_KEY?}  # https://www.themoviedb.org/settings/api
+      - FANART_API=${FANART_API_KEY?}  # https://fanart.tv/get-an-api-key/
+      - TVDB_API_KEY=${TVDB_API_KEY?}  # https://thetvdb.com/api-information
+      - HOST_NAME=https://${TMDB_ADDON_REDIS_HOSTNAME?}
+      - METRICS_USER=${METRICS_USER?}
+      - METRICS_PASSWORD=${METRICS_PASSWORD?}
+      - REDIS_URL=redis://tmdb-addon_redis:6379
+      - META_TTL=604800  # 1 week
+      - CATALOG_TTL=86400  # 1 day
+      - NO_CACHE=false  # Enable cache, set to true to disable
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tmdb-redis.rule=Host(`${TMDB_ADDON_REDIS_HOSTNAME?}`)"
+      - "traefik.http.routers.tmdb-redis.entrypoints=websecure"
+      - "traefik.http.routers.tmdb-redis.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.tmdb-redis.middlewares=authelia@docker"
+      - "traefik.http.services.tmdb-redis.loadbalancer.server.port=3232"
+    depends_on:
+      tmdb-addon-redis_redis:
+        condition: service_healthy
+    profiles:
+      - tmdb-addon-redis
+      - stremio
+      - all
+  
+  tmdb-addon-redis_redis:
+    image: redis:latest
+    container_name: tmdb-addon-redis_redis
+    restart: unless-stopped
+    volumes:
+      - ${DOCKER_DATA_DIR}/tmdb-redis/cache:/data
+    command: redis-server --appendonly yes --save 60 1
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - tmdb-addon-redis
+      - stremio
+      - all
