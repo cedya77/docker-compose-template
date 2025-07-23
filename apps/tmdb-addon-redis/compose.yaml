@@ -13,7 +13,7 @@ services:
       - HOST_NAME=https://${TMDB_ADDON_REDIS_HOSTNAME?}
       - METRICS_USER=${METRICS_USER?}
       - METRICS_PASSWORD=${METRICS_PASSWORD?}
-      - REDIS_URL=redis://tmdb-addon_redis:6379
+      - REDIS_URL=redis://tmdb-addon-redis_redis:6379
       - META_TTL=604800  # 1 week
       - CATALOG_TTL=86400  # 1 day
       - NO_CACHE=false  # Enable cache, set to true to disable
