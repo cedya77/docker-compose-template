@@ -27,7 +27,6 @@ services:
       - ${DOCKER_DATA_DIR}/anime-kitsu/imdb_mapping.json:/home/node/app/static/data/imdb_mapping.json
     profiles:
       - anime-kitsu
-      - stremio
       - all
 
   anime-kitsu_mongo:
@@ -44,7 +43,6 @@ services:
       start_period: 40s
     profiles:
       - anime-kitsu
-      - stremio
       - all
 
 

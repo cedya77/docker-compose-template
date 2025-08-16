@@ -1,4 +1,7 @@
 {
+    "url_base": "/",
+    "port": "8282",
+    "log_level": "trace",
     "debrids": [
         {
             "name": "realdebrid",
@@ -10,67 +13,147 @@
             "download_links_refresh_interval": "40m",
             "workers": 200,
             "auto_expire_links_after": "3d",
-            "folder_naming": "original_no_ext",
-            "rc_url": "http://rclone:9990",
-            "download_uncached": false,
-            "serve_from_rclone": true
+            "folder_naming": "original_no_ext"
         }
     ],
-    "max_cache_size": 10000,
     "qbittorrent": {
         "download_folder": "/mnt/symlinks/",
-        "categories": [
-            "sonarr",
-            "sonarr4k",
-            "sonarranime",
-            "radarr",
-            "radarr4k",
-            "radarranime"
-        ],
-        "refresh_interval": 5,
-        "skip_pre_cache": false
-    },
-    "repair": {
-        "enabled": true,
-        "interval": "12h",
-        "run_on_start": false,
-        "use_webdav": true,
-        "auto_process": true,
-        "_comment_addThisIfYouAreUsingZurg_zurg_url": "http://zurg:9999"
+        "refresh_interval": 5
     },
     "arrs": [
         {
             "name": "sonarr",
             "host": "http://sonarr:8989",
-            "token": ""
+            "token": "",
+            "download_uncached": false
         },
         {
             "name": "sonarr4k",
             "host": "http://sonarr4k:8989",
-            "token": ""
+            "token": "",
+            "download_uncached": false
         },
         {
             "name": "sonarranime",
             "host": "http://sonarranime:8989",
-            "token": ""
+            "token": "",
+            "download_uncached": false
         },
         {
             "name": "radarr",
             "host": "http://radarr:7878",
-            "token": ""
+            "token": "",
+            "download_uncached": false
         },
         {
             "name": "radarr4k",
             "host": "http://radarr4k:7878",
-            "token": ""
+            "token": "",
+            "download_uncached": false
         },
         {
             "name": "radarranime",
             "host": "http://radarranime:7878",
-            "token": ""
+            "token": "",
+            "download_uncached": false
         }
     ],
-    "use_auth": false,
-    "log_level": "info",
-    "port": "8282"
+    "repair": {
+        "enabled": true,
+        "interval": "12h",
+        "auto_process": true,
+        "use_webdav": true,
+        "workers": 1,
+        "strategy": "per_torrent"
+    },
+    "webdav": {},
+    "rclone": {
+        "enabled": true,
+        "mount_path": "/mnt/remote",
+        "vfs_cache_mode": "writes",
+        "vfs_cache_max_age": "48h",
+        "vfs_cache_max_size": "30G",
+        "vfs_cache_poll_interval": "30s",
+        "vfs_read_chunk_size": "256M",
+        "vfs_read_chunk_size_limit": "8192M",
+        "vfs_read_ahead": "512M",
+        "buffer_size": "128M",
+        "uid": 1001,
+        "gid": 1001,
+        "attr_timeout": "1s",
+        "dir_cache_time": "5s",
+        "no_modtime": true,
+        "no_checksum": true
+    },
+    "allowed_file_types": [
+        "3gp",
+        "ac3",
+        "aiff",
+        "alac",
+        "amr",
+        "ape",
+        "asf",
+        "asx",
+        "avc",
+        "avi",
+        "bin",
+        "bivx",
+        "dat",
+        "divx",
+        "dts",
+        "dv",
+        "dvr-ms",
+        "flac",
+        "fli",
+        "flv",
+        "ifo",
+        "img",
+        "iso",
+        "m2ts'",
+        "m2v",
+        "m3u",
+        "m4a",
+        "m4p",
+        "m4v",
+        "mid",
+        "midi",
+        "mk3d",
+        "mka",
+        "mkv",
+        "mov",
+        "mp2",
+        "mp3",
+        "mp4",
+        "mpa",
+        "mpeg",
+        "mpg",
+        "nrg",
+        "nsv",
+        "nuv",
+        "ogg",
+        "ogm",
+        "ogv",
+        "pva",
+        "qt",
+        "ra",
+        "rm",
+        "rmvb",
+        "strm",
+        "svq3",
+        "ts",
+        "ty",
+        "viv",
+        "vob",
+        "voc",
+        "vp3",
+        "wav",
+        "webm",
+        "wma",
+        "wmv",
+        "wpl",
+        "wtv",
+        "wv",
+        "xvid"
+    ],
+    "discord_webhook_url": ""
 }

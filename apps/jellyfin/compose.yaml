@@ -19,8 +19,8 @@ services:
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
       - "traefik.http.routers.jellyfin.tls.certresolver=letsencrypt"
     depends_on:
-      - rclone
+      decypharr:
+        condition: service_healthy
     profiles:
       - jellyfin
-      - debrid_media_server
       - all

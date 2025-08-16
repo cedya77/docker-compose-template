@@ -23,11 +23,13 @@ services:
     profiles:
       - all
       - bazarr
-      - debrid_media_server
     depends_on:
-      - rclone
-      - sonarr
-      - radarr
+      decypharr:
+        condition: service_healthy
+      sonarr:
+        condition: service_healthy
+      radarr:
+        condition: service_healthy
 
 
   bazarr4k:
@@ -54,8 +56,10 @@ services:
     profiles:
       - all
       - bazarr
-      - debrid_media_server
     depends_on:
-      - rclone
-      - sonarr4k
-      - radarr4k
+      decypharr:
+        condition: service_healthy
+      sonarr4k:
+        condition: service_healthy
+      radarr4k:
+        condition: service_healthy

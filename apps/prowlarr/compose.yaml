@@ -27,6 +27,4 @@ services:
       start_period: 30s
     profiles:
       - prowlarr
-      - stremio
-      - debrid_media_server
       - all

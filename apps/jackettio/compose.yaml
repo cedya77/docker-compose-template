@@ -21,6 +21,5 @@ services:
       - "traefik.http.routers.jackettio.middlewares=authelia@docker"
     profiles:
       - jackettio
-      - stremio
       - all
     

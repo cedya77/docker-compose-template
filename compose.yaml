@@ -3,6 +3,7 @@ include:
   - apps/addon-manager/compose.yaml
   - apps/adguard/compose.yaml
   - apps/aiolists/compose.yaml
+  - apps/aiometadata/compose.yaml
   - apps/aiostreams/compose.yaml
   - apps/aiostremio/compose.yaml
   - apps/anime-kitsu/compose.yaml
@@ -24,6 +25,8 @@ include:
   - apps/dozzle/compose.yaml
   - apps/easynews-plus/compose.yaml
   - apps/easynews-plus-plus/compose.yaml
+  - apps/fivefilters-full-text-rss/compose.yaml
+  - apps/freshrss/compose.yaml
   - apps/gluetun/compose.yaml
   - apps/honey/compose.yaml
   - apps/huntarr/compose.yaml
@@ -58,6 +61,7 @@ include:
   - apps/redlib/compose.yaml
   - apps/realdebrid-account-monitor/compose.yaml
   - apps/recyclarr/compose.yaml
+  - apps/rss-bridge/compose.yaml
   - apps/seanime/compose.yaml
   - apps/searxng/compose.yaml
   - apps/sonarr/compose.yaml
@@ -66,6 +70,7 @@ include:
   - apps/stirling-pdf/compose.yaml
   - apps/streamystats/compose.yaml
   - apps/stremio-account-bootstrapper/compose.yaml
+  - apps/stremio-ai-companion/compose.yaml
   - apps/stremio-ai-search/compose.yaml
   - apps/stremio-catalog-providers/compose.yaml
   - apps/stremio-jackett/compose.yaml
@@ -75,10 +80,10 @@ include:
   - apps/stremio-trakt-addon/compose.yaml
   - apps/stremthru/compose.yaml
   - apps/syncribullet/compose.yaml
+  - apps/tandoor/compose.yaml
   - apps/tautulli/compose.yaml
   - apps/thelounge/compose.yaml
   - apps/tmdb-addon/compose.yaml
-  - apps/tmdb-addon-redis/compose.yaml
   - apps/tmdb-collections/compose.yaml
   - apps/torbox-manager/compose.yaml
   - apps/torbox-media-center/compose.yaml
@@ -86,6 +91,7 @@ include:
   - apps/tweakio/compose.yaml
   - apps/uptime-kuma/compose.yaml
   - apps/vaultwarden/compose.yaml
+  - apps/wallos/compose.yaml
   - apps/warp/compose.yaml
   - apps/watchtower/compose.yaml
   - apps/webstreamr/compose.yaml

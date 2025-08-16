@@ -44,7 +44,6 @@ services:
       - "traefik.http.routers.ravenn-trakt.middlewares=authelia@docker"
     profiles:
       - stremio-trakt-addon
-      - stremio
       - all
 
   stremio-trakt-addon_postgres:
@@ -67,7 +66,6 @@ services:
       start_period: 10s
     profiles:
       - stremio-trakt-addon
-      - stremio
       - all
 
   stremio-trakt-addon_redis:
@@ -85,5 +83,4 @@ services:
       retries: 5
     profiles:
       - stremio-trakt-addon
-      - stremio
       - all

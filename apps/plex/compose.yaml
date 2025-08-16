@@ -37,8 +37,8 @@ services:
       retries: 3
       start_period: 1m
     depends_on:
-      - rclone
+      decypharr:
+        condition: service_healthy
     profiles:
       - all
       - plex
-      - debrid_media_server

@@ -17,5 +17,4 @@ services:
       - ${DOCKER_DATA_DIR}/aiostreams:/app/data
     profiles:
       - aiostreams
-      - stremio
       - all

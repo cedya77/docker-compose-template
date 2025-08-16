@@ -18,7 +18,6 @@ services:
       - "traefik.http.routers.aiostremio.middlewares=authelia@docker"
     profiles:
       - aiostremio
-      - stremio
       - all
     depends_on:
       aiostremio_redis:
@@ -38,5 +37,4 @@ services:
       retries: 5
     profiles:
       - aiostremio
-      - stremio
       - all

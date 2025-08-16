@@ -1,0 +1,48 @@
+services:
+  aiometadata:
+    image: ghcr.io/cedya77/aiometadata:beta
+    container_name: aiometadata
+    restart: unless-stopped
+    expose:
+      - ${PORT:-3232}
+    environment:
+      - PORT=${PORT:-3232}
+      - TMDB_API=${TMDB_API_KEY?}
+      - TVDB_API_KEY=${TVDB_API_KEY?}
+      - FANART_API_KEY=${FANART_API_KEY?}
+      - HOST_NAME=https://${AIOMETADATA_HOSTNAME?}
+      - REDIS_URL=redis://aiometadata_redis:6379
+      - META_TTL=604800
+      - CATALOG_TTL=86400
+      - NO_CACHE=false
+      - DEBUG=true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.aiometadata.rule=Host(`${AIOMETADATA_HOSTNAME?}`)"
+      - "traefik.http.routers.aiometadata.entrypoints=websecure"
+      - "traefik.http.routers.aiometadata.tls.certresolver=letsencrypt"
+      - "traefik.http.services.aiometadata.loadbalancer.server.port=${PORT:-3232}"
+    volumes:
+      - ${DOCKER_DATA_DIR}/aiometadata/data:/app/addon/data
+    depends_on:
+      aiometadata_redis:
+        condition: service_healthy
+    profiles:
+      - aiometadata
+      - all
+
+  aiometadata_redis:
+    image: redis:latest
+    container_name: aiometadata_redis
+    restart: unless-stopped
+    volumes:
+      - ${DOCKER_DATA_DIR}/aiometadata/cache:/data
+    command: redis-server --appendonly yes --save 60 1
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - aiometadata
+      - all

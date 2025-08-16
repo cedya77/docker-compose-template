@@ -20,7 +20,8 @@ services:
       - ${DOCKER_DATA_DIR}/sonarr/default:/config
       - /usr/bin/rclone:/usr/bin/rclone
     depends_on:
-      - rclone
+      decypharr:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:8989/ping | grep -q '\"status\": \"OK\"' || exit 1"]
       interval: 1m
@@ -28,7 +29,6 @@ services:
       retries: 5
       start_period: 10s
     profiles:
-      - debrid_media_server
       - all
 
   sonarr4k:
@@ -52,7 +52,8 @@ services:
       - ${DOCKER_DATA_DIR}/sonarr/4k:/config
       - /usr/bin/rclone:/usr/bin/rclone
     depends_on:
-      - rclone
+      decypharr:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:8989/ping | grep -q '\"status\": \"OK\"' || exit 1"]
       interval: 1m
@@ -61,7 +62,6 @@ services:
       start_period: 10s
     profiles:
       - sonarr
-      - debrid_media_server
       - all
 
 
@@ -86,8 +86,8 @@ services:
       - ${DOCKER_DATA_DIR}/sonarr/anime:/config
       - /usr/bin/rclone:/usr/bin/rclone
     depends_on:
-      - sonarr
-      - rclone
+      decypharr:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:8989/ping | grep -q '\"status\": \"OK\"' || exit 1"]
       interval: 1m
@@ -95,7 +95,6 @@ services:
       retries: 5
       start_period: 10s
     profiles:
-      - debrid_media_server
       - all
 
 

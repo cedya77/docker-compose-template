@@ -12,5 +12,5 @@ services:
     volumes:
       - ${TORBOX_MOUNT_PATH}:/torbox
     profiles:
-      - debrid_media_server
+      - torbox-media-center
       - all

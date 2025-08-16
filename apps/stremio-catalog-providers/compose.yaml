@@ -41,7 +41,6 @@ services:
       - "traefik.http.routers.ravenn-catalogs.middlewares=authelia@docker"
     profiles:
       - stremio-catalog-providers
-      - stremio
       - all  
       
   stremio-catalog-providers_postgres:
@@ -63,7 +62,6 @@ services:
       start_period: 10s
     profiles:
       - stremio-catalog-providers
-      - stremio
       - all
 
   stremio-catalog-providers_redis:
@@ -80,5 +78,4 @@ services:
       retries: 5
     profiles:
       - stremio-catalog-providers
-      - stremio
       - all

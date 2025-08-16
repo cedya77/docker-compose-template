@@ -21,5 +21,4 @@ services:
       - "traefik.http.services.stremio-ai-search.loadbalancer.server.port=7000"
     profiles:
       - stremio-ai-search
-      - stremio
       - all

@@ -19,6 +19,7 @@ services:
       # Do NOT include non-stremio addon domains here. It would mean that those services would not be fully protected, or in most cases not protected at all.
       TEMPLATE_STREMIO_ADDON_HOSTNAMES: >-
         ${AIOLISTS_HOSTNAME},
+        ${AIOMETADATA_HOSTNAME},
         ${AIOSTREAMS_HOSTNAME},
         ${AIOSTREMIO_HOSTNAME},
         ${ANIME_KITSU_HOSTNAME},
@@ -28,6 +29,7 @@ services:
         ${MEDIAFUSION_HOSTNAME},
         ${JACKETTIO_HOSTNAME},
         ${PLEXIO_HOSTNAME},
+        ${STREMIO_AI_COMPANION_HOSTNAME},
         ${STREMIO_AI_SEARCH_HOSTNAME},
         ${STREMIO_JACKETT_HOSTNAME},
         ${STREMIO_LETTERBOXD_HOSTNAME},
@@ -38,9 +40,12 @@ services:
         ${STREMIO_STREAMING_CATALOGS_HOSTNAME},
         ${SYNCRIBULLET_HOSTNAME},
         ${TMDB_ADDON_HOSTNAME},
-        ${TMDB_ADDON_REDIS_HOSTNAME},
         ${TMDB_COLLECTIONS_HOSTNAME},
         ${WEBSTREAMR_HOSTNAME}
+      TEMPLATE_FRESHRSS_HOSTNAME: ${FRESHRSS_HOSTNAME?}
+      TEMPLATE_KARAKEEP_HOSTNAME: ${KARAKEEP_HOSTNAME?}
+      TEMPLATE_ACTUAL_BUDGET_HOSTNAME: ${ACTUAL_BUDGET_HOSTNAME?}
+      TEMPLATE_TANDOOR_HOSTNAME: ${TANDOOR_HOSTNAME?}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.authelia.rule=Host(`${AUTHELIA_HOSTNAME?}`)"

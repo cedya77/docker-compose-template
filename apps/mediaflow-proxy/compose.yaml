@@ -21,5 +21,4 @@ services:
       start_period: 10s
     profiles:
       - mediaflow-proxy
-      - stremio
       - all

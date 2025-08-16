@@ -26,7 +26,6 @@ services:
       - "traefik.http.routers.mediafusion.middlewares=authelia@docker"
     profiles:
       - mediafusion
-      - stremio
       - all
 
   mediafusion_scheduler:
@@ -43,7 +42,6 @@ services:
         condition: service_healthy
     profiles:
       - mediafusion
-      - stremio
       - all
   
   browserless:
@@ -59,7 +57,6 @@ services:
       retries: 3
     profiles:
       - mediafusion
-      - stremio
       - all
 
   mediafusion_mongodb:
@@ -76,7 +73,6 @@ services:
       start_period: 40s
     profiles:
       - mediafusion
-      - stremio
       - all
 
   mediafusion_redis:
@@ -93,5 +89,4 @@ services:
       retries: 5
     profiles:
       - mediafusion
-      - stremio
       - all

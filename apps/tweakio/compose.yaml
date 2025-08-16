@@ -12,7 +12,6 @@ services:
       - ./config.yaml:/app/config.yaml
     profiles:
       - all
-      - debrid_media_server
       - tweakio
     depends_on:
       warp:

@@ -18,5 +18,4 @@ services:
       - "traefik.http.services.stremthru.loadbalancer.server.port=8080"
     profiles:
       - stremthru
-      - stremio
       - all

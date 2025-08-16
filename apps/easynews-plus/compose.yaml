@@ -13,5 +13,4 @@ services:
       - "traefik.http.routers.easynews-plus.middlewares=authelia@docker"
     profiles:
       - easynews-plus
-      - stremio
       - all

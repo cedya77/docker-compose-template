@@ -30,8 +30,8 @@ services:
       radarr: 
         condition: service_healthy
     profiles:
-      - debrid_media_server
       - all
+      - blackhole
 
 
   blackhole4k:
@@ -67,9 +67,8 @@ services:
       radarr4k:
         condition: service_healthy
     profiles:
-      - debrid_media_server
       - all
-    
+      - blackhole
 
     
   blackholeanime:
@@ -106,7 +105,6 @@ services:
       radarranime:
         condition: service_healthy
     profiles:
-      - debrid_media_server
       - all
-    
+      - blackhole
 

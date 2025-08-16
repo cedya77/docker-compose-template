@@ -16,8 +16,8 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR}/jellyseer:/app/config
     depends_on:
-      - rclone
+      decypharr:
+        condition: service_healthy
     profiles:
       - jellyseer
-      - debrid_media_server
       - all

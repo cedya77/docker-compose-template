@@ -18,5 +18,4 @@ services:
       - ${DOCKER_DATA_DIR}/overseerr:/app/config
     profiles:
       - overseerr
-      - debrid_media_server
       - all

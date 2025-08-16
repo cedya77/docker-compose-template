@@ -12,5 +12,4 @@ services:
       - "traefik.http.routers.stremio-server.tls.certresolver=letsencrypt"
     profiles:
       - stremio-server
-      - stremio
       - all

@@ -41,6 +41,5 @@ services:
     volumes:
       - ${DOCKER_DATA_DIR}/stremio-letterboxd:/app/data
     profiles:
-      - stremio
       - stremio-letterboxd
       - all

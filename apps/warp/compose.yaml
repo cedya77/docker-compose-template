@@ -24,6 +24,4 @@ services:
       start_period: 5s
     profiles:
       - warp
-      - stremio
       - all
-      - debrid_media_server
