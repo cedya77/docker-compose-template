@@ -54,7 +54,8 @@ services:
       - "traefik.http.routers.radarr4k.middlewares=authelia@docker"
       - "traefik.http.services.radarr4k.loadbalancer.server.port=7878"
     depends_on:
-      - rclone
+      decypharr:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "curl -s http://localhost:7878/ping | grep -q '\"status\": \"OK\"' || exit 1"]
       interval: 1m
