@@ -11,6 +11,7 @@ services:
       - TVDB_API_KEY=${TVDB_API_KEY?}
       - FANART_API_KEY=${FANART_API_KEY?}
       - HOST_NAME=https://${AIOMETADATA_HOSTNAME?}
+      - DATABASE_URI=sqlite:///app/addon/data/db.sqlite
       - REDIS_URL=redis://aiometadata_redis:6379
       - META_TTL=604800
       - CATALOG_TTL=86400
