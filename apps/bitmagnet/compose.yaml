@@ -1,0 +1,109 @@
+services:
+  bitmagnet:
+    container_name: bitmagnet
+    image: ghcr.io/bitmagnet-io/bitmagnet:latest
+    volumes:
+      - ${DOCKER_APP_DIR}/bitmagnet/config:/root/.config/bitmagnet
+    restart: unless-stopped
+    environment:
+      # Enable logging to rotating files for ingest to Loki:
+      - LOG_FILE_ROTATOR_ENABLED=false
+      - POSTGRES_HOST=bitmagnet_postgres
+      - POSTGRES_PASSWORD=bitmagnet
+      - POSTGRES_DB=bitmagnet
+      - POSTGRES_USER=bitmagnet
+      - TMDB_API_KEY=${TMDB_API_KEY}
+    network_mode: service:bitmagnet_vpn
+    depends_on:
+      bitmagnet_postgres:
+        condition: service_healthy
+      bitmagnet_vpn:
+        condition: service_healthy
+    command:
+      - worker
+      - run
+      # Run all workers:
+      - --all
+      # Or enable individual workers:
+      # - --keys=http_server
+      # - --keys=queue_server
+      # - --keys=dht_crawler
+    profiles:
+      - bitmagnet
+      - all
+
+  bitmagnet_vpn:
+    container_name: bitmagnet_vpn
+    hostname: bitmagnet
+    image: qmcgaw/gluetun
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      # The bitmagnet ports must be exposed by the gluetun container:
+      # - "3333:3333" # web UI
+      # BitTorrent ports:
+      - "3334:3334/tcp"
+      - "3334:3334/udp"
+    env_file:
+      - ${DOCKER_APP_DIR}/gluetun/.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.bitmagnet.rule=Host(`${BITMAGNET_HOSTNAME}`)"
+      - "traefik.http.routers.bitmagnet.entrypoints=websecure"
+      - "traefik.http.routers.bitmagnet.tls=true"
+      - "traefik.http.routers.bitmagnet.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.bitmagnet.middlewares=authelia@docker"
+      - "traefik.http.services.bitmagnet.loadbalancer.server.port=3333"
+    volumes:
+      - ${DOCKER_DATA_DIR}/gluetun:/gluetun
+    healthcheck:
+      test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 1m
+    extra_hosts:
+      - "bitmagnet_postgres:192.168.55.11"
+    networks:
+      bitmagnet: 
+        ipv4_address: 192.168.55.10
+      default:
+    profiles:
+      - bitmagnet
+      - all
+
+  bitmagnet_postgres:
+    image: postgres:16-alpine
+    container_name: bitmagnet_postgres
+    volumes:
+      - ${DOCKER_DATA_DIR}/bitmagnet/db:/var/lib/postgresql/data
+    shm_size: 1g
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=bitmagnet
+      - POSTGRES_DB=bitmagnet
+      - POSTGRES_USER=bitmagnet
+    networks:
+      bitmagnet:
+        ipv4_address: 192.168.55.11
+      default:
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "bitmagnet", "-d", "bitmagnet"]
+      interval: 10s
+      start_period: 20s
+    profiles:
+      - bitmagnet
+      - all
+
+
+networks:
+  bitmagnet:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1

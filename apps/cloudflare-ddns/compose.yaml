@@ -27,6 +27,7 @@ services:
         ${BAZARR_HOSTNAME},
         ${BAZARR4K_HOSTNAME},
         ${BESZEL_HOSTNAME},
+        ${BITMAGNET_HOSTNAME},
         ${COMET_HOSTNAME},
         ${DASHDOT_HOSTNAME},
         ${DEBRIDAV_HOSTNAME},

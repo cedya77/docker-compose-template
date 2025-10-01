@@ -4,18 +4,20 @@ services:
     container_name: arcane
     restart: unless-stopped
     expose:
-      - 3000
+      - 3552
     environment:
-      - APP_ENV=production
       - PUID=${PUID}
       - PGID=${PGID}
-      - PUBLIC_SESSION_SECRET=${PUBLIC_SESSION_SECRET?}
+      - APP_URL=https://${ARCANE_HOSTNAME}
+      - ENCRYPTION_KEY=${ARCANE_ENCRYPTION_KEY}
+      - JWT_SECRET=${ARCANE_JWT_SECRET}
+      - DATABASE_URL=file:/app/data/arcane.db?_pragma=journal_mode(WAL)&_pragma=busy_timeout(2500)&_txlock=immediate
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.arcane.rule=Host(`${ARCANE_HOSTNAME?}`)"
       - "traefik.http.routers.arcane.entrypoints=websecure"
       - "traefik.http.routers.arcane.tls.certresolver=letsencrypt"
-      - "traefik.http.services.arcane.loadbalancer.server.port=3000"
+      - "traefik.http.services.arcane.loadbalancer.server.port=3552"
       - "traefik.http.routers.arcane.middlewares=authelia@docker"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
