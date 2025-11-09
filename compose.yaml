@@ -6,6 +6,7 @@ include:
   - apps/aiometadata/compose.yaml
   - apps/aiostreams/compose.yaml
   - apps/aiostremio/compose.yaml
+  - apps/altmount/compose.yaml
   - apps/anime-kitsu/compose.yaml
   - apps/apprise/compose.yaml
   - apps/arcane/compose.yaml
@@ -24,6 +25,7 @@ include:
   - apps/discord-tickets/compose.yaml
   - apps/dockge/compose.yaml
   - apps/dozzle/compose.yaml
+  - apps/easynews-indexer/compose.yaml
   - apps/easynews-plus/compose.yaml
   - apps/easynews-plus-plus/compose.yaml
   - apps/fivefilters-full-text-rss/compose.yaml
@@ -49,6 +51,7 @@ include:
   - apps/nitter/compose.yaml
   - apps/notifiarr/compose.yaml
   - apps/ntfy/compose.yaml
+  - apps/nzbdav/compose.yaml
   - apps/nzbhydra2/compose.yaml
   - apps/omg-tv-addon/compose.yaml
   - apps/overseerr/compose.yaml
@@ -92,15 +95,18 @@ include:
   - apps/traefik/compose.yaml
   - apps/tweakio/compose.yaml
   - apps/uptime-kuma/compose.yaml
+  - apps/usenet-streamer/compose.yaml
   - apps/vaultwarden/compose.yaml
   - apps/wallos/compose.yaml
   - apps/warp/compose.yaml
   - apps/watchtower/compose.yaml
   - apps/webstreamr/compose.yaml
-  - apps/wests-scripts/compose.yaml
   - apps/yamtrack/compose.yaml
   - apps/zilean/compose.yaml
   - apps/zipline/compose.yaml
+  # If you would like to use wests scripts, which include blackhole and repair, uncomment the line below.
+  # It is recommended you use decypharr instead, however. 
+  # - apps/wests-scripts/compose.yaml
   # Uncomment if you are using zurg and comment out decypharr
   # There is also a way to use both together, but it requires 2 rclone instances
   # To use both, update Zurg's rclone service name and its container name to rclone_zurg

@@ -1,0 +1,12 @@
+services:
+  easynews-indexer:
+    image: ghcr.io/sanket9225/easynewsindexer
+    container_name: easynews-indexer
+    restart: unless-stopped
+    expose:
+      - ${PORT}
+    env_file:
+      - .env
+    profiles:
+      - easynews-indexer
+      - all

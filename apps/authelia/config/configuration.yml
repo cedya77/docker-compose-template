@@ -734,6 +734,19 @@ access_control:
     - domain_regex: '^({{ env "TEMPLATE_STREMIO_ADDON_HOSTNAMES" | replace "," "|" | replace "." "\\." | replace " " "" }})$'
       policy: 'bypass'
 
+    - domain: '{{ env "TEMPLATE_NZBDAV_HOSTNAME" }}'
+      policy: 'bypass'
+      resources:
+        - '^/api.*$'
+        - '^/content.*$'
+        - '^/$'
+
+    - domain: '{{ env "TEMPLATE_ALTMOUNT_HOSTNAME" }}'
+      policy: 'bypass'
+      resources:
+        - '^/sabnzbd\/api.*$'
+        - '^/webdav.*$'
+
     ## FreshRSS API endpoints bypass authentication for RSS reader apps
     - domain: '{{ env "TEMPLATE_FRESHRSS_HOSTNAME" }}'
       resources:
