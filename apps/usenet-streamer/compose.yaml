@@ -1,7 +1,7 @@
 services:
   usenet-streamer:
-    image: ghcr.io/sanket9225/usenetstreamer:latest
-    container_name: usenet_streamer
+    image: sanket9225/usenetstreamer:latest
+    container_name: usenet-streamer
     restart: unless-stopped
     expose:
       - 7000

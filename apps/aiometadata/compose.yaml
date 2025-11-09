@@ -1,10 +1,12 @@
 services:
   aiometadata:
-    image: ghcr.io/cedya77/aiometadata:beta
+    image: ghcr.io/cedya77/aiometadata:latest
     container_name: aiometadata
     restart: unless-stopped
     expose:
       - ${PORT:-1337}
+    env_file:
+      - .env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.aiometadata.rule=Host(`${AIOMETADATA_HOSTNAME?}`)"
