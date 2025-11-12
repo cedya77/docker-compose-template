@@ -1,6 +1,6 @@
 services:
   easynews-indexer:
-    image: ghcr.io/sanket9225/easynewsindexer
+    image: sanket9225/easynewsindexer
     container_name: easynews-indexer
     restart: unless-stopped
     expose:
