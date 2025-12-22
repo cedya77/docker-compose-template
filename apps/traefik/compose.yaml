@@ -30,20 +30,37 @@ services:
       - "--entryPoints.websecure.address=:443"
       - "--entryPoints.dot.address=:853"
       
-      
-      - "--entryPoints.web.forwardedHeaders.insecure=false"
-      - "--entryPoints.web.proxyProtocol.insecure=false"
-
+      # redirect http to https
       - "--entryPoints.web.http.redirections.entryPoint.to=websecure"
       - "--entryPoints.web.http.redirections.entryPoint.scheme=https"
+      - "--entryPoints.web.http.redirections.entryPoint.permanent=false"
+
+      # setup forwarded headers and proxy protocol for trusted proxies
+      - "--entryPoints.web.forwardedHeaders.insecure=false"
+      - "--entryPoints.web.proxyProtocol.insecure=false"
       - "--entryPoints.web.forwardedHeaders.trustedIPs=${TRUSTED_IPS}"
       - "--entryPoints.web.proxyProtocol.trustedIPs=${TRUSTED_IPS}"
-
-
       - "--entryPoints.websecure.forwardedHeaders.insecure=false"
       - "--entryPoints.websecure.proxyProtocol.insecure=false"
       - "--entryPoints.websecure.forwardedHeaders.trustedIPs=${TRUSTED_IPS}"
       - "--entryPoints.websecure.proxyProtocol.trustedIPs=${TRUSTED_IPS}"
+
+      # allow all encoded characters in path params
+      - "--entryPoints.web.http.encodedcharacters.allowencodedslash=true"
+      - "--entryPoints.web.http.encodedcharacters.allowencodedbackslash=true"
+      - "--entryPoints.web.http.encodedcharacters.allowencodednullcharacter=true"
+      - "--entryPoints.web.http.encodedcharacters.allowencodedsemicolon=true"
+      - "--entryPoints.web.http.encodedcharacters.allowencodedpercent=true"
+      - "--entryPoints.web.http.encodedcharacters.allowencodedquestionmark=true"
+      - "--entryPoints.web.http.encodedcharacters.allowencodedhash=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodedslash=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodedbackslash=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodednullcharacter=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodedsemicolon=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodedpercent=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodedquestionmark=true"
+      - "--entryPoints.websecure.http.encodedcharacters.allowencodedhash=true"
+
       # If you dont mind applying crowdsec to all routers, just uncomment the line below
       # - "--entryPoints.websecure.http.middlewares=crowdsec@docker"
       # You can instead choose to add it to specific routers only
