@@ -158,6 +158,12 @@
 			"icon": "https://raw.githubusercontent.com/Viren070/stremio-addon-manager/refs/heads/main/public/logo.png"
 		},
 		{
+			"name": "Cinebye",
+			"desc": "Add-on manager for Stremio with backup/restore and Cinemeta controls.",
+			"href": "https://cinebye.yourdomain.com",
+			"icon": "https://raw.githubusercontent.com/0xConstant1/stremio-addon-manager/refs/heads/main/public/logo.png"
+		},
+		{
 			"name": "Stremio Account Bootstrapper",
 			"desc": "Stremio account bootstrapper.",
 			"href": "https://stremio-account-bootstrapper.yourdomain.com",
