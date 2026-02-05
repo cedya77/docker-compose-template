@@ -1,4 +1,3 @@
----
 services:
   aiomanager:
     image: ghcr.io/sonicx161/aiomanager:latest
