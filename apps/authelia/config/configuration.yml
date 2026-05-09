@@ -790,6 +790,28 @@ access_control:
         - '^/openapi/.*$' 
       policy: 'bypass'
 
+    ## Seanime API endpoints bypass authentication for streams and mobile apps.
+    - domain: '{{ env "TEMPLATE_SEANIME_HOSTNAME" }}'
+      policy: 'bypass'
+      resources:
+        - '^/api.*$'
+
+    ## XRDB image and proxy endpoints bypass authentication for media clients
+    - domain: '{{ env "TEMPLATE_XRDB_HOSTNAME" }}'
+      resources:
+        - '^/poster(/.*)?$'
+        - '^/backdrop(/.*)?$'
+        - '^/logo(/.*)?$'
+        - '^/thumbnail(/.*)?$'
+        - '^/proxy(/.*)?$'
+        - '^/preview(/.*)?$'
+        - '^/api(/.*)?$'
+        - '^/_next(/.*)?$'
+        - '^/favicon\.ico$'
+        - '^/assets(/.*)?$'
+        - '^/fonts(/.*)?$'
+      policy: 'bypass'
+
     - domain: '*.{{ env "TEMPLATE_DOMAIN" }}'
       policy: 'two_factor'
 
