@@ -795,6 +795,7 @@ access_control:
       policy: 'bypass'
       resources:
         - '^/api.*$'
+        - '^/events.*$'
 
     ## XRDB image and proxy endpoints bypass authentication for media clients
     - domain: '{{ env "TEMPLATE_XRDB_HOSTNAME" }}'
