@@ -5,20 +5,17 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    environment:
-      PORT: 3000
-      XRDB_DB_PATH: /app/data/xrdb.db
     expose:
-      - 3000
+      - 8787
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.xrdb.rule=Host(`${XRDB_HOSTNAME?}`)"
       - "traefik.http.routers.xrdb.entrypoints=websecure"
       - "traefik.http.routers.xrdb.tls.certresolver=letsencrypt"
       - "traefik.http.routers.xrdb.middlewares=authelia@docker"
-      - "traefik.http.services.xrdb.loadbalancer.server.port=3000"
+      - "traefik.http.services.xrdb.loadbalancer.server.port=8787"
     volumes:
-      - ${DOCKER_DATA_DIR}/xrdb:/app/data
+      - ${DOCKER_DATA_DIR}/xrdb:/data
     profiles:
       - xrdb
       - all

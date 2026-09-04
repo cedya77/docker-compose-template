@@ -809,20 +809,27 @@ access_control:
         - '^/api.*$'
         - '^/events.*$'
 
-    ## XRDB image and proxy endpoints bypass authentication for media clients
+    ## Protect the XRDB admin API. Must come before the bypass below.
     - domain: '{{ env "TEMPLATE_XRDB_HOSTNAME" }}'
       resources:
-        - '^/poster(/.*)?$'
-        - '^/backdrop(/.*)?$'
-        - '^/logo(/.*)?$'
-        - '^/thumbnail(/.*)?$'
-        - '^/proxy(/.*)?$'
-        - '^/preview(/.*)?$'
-        - '^/api(/.*)?$'
-        - '^/_next(/.*)?$'
-        - '^/favicon\.ico$'
-        - '^/assets(/.*)?$'
-        - '^/fonts(/.*)?$'
+        - '^/api/admin(/.*)?$'
+      policy: 'two_factor'
+
+    ## XRDB artwork and addon endpoints bypass authentication for media clients
+    - domain: '{{ env "TEMPLATE_XRDB_HOSTNAME" }}'
+      resources:
+        - '^/poster/[^/]+$'
+        - '^/backdrop/[^/]+$'
+        - '^/thumbnail/[^/]+$'
+        - '^/logo/[^/]+$'
+        - '^/stremio/manifest\.json$'
+        - '^/stremio/meta/.*$'
+        - '^/stremio/c/[^/]+/manifest\.json$'
+        - '^/stremio/c/[^/]+/meta/.*$'
+        - '^/[^/]+/(imdb|tmdb)/[^/]+/[^/]+$'   # RPDB-compatible artwork routes
+        - '^/[^/]+/isValid$'                   # RPDB key check
+        - '^/healthz$'
+        - '^/readyz$'
       policy: 'bypass'
 
     ## ERDB image and proxy endpoints bypass authentication for media clients
